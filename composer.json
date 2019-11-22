@@ -1,0 +1,35 @@
+{
+    "name": "spreadaurora/ci4_logs",
+    "description": "Lightweight logs management for CodeIgniter 4",
+    "keywords": [
+        "codeigniter",
+        "codeigniter4",
+        "logs"
+    ],
+    "homepage": "https://github.com/adnduweb/ci4_logs",
+    "license": "MIT",
+    "authors": [{
+        "name": "Fabrice Loru",
+        "email": "fabrice@adnduweb.com",
+        "homepage": "https://www.adnduweb.com",
+        "role": "Developer"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "codeigniter4/framework": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spreadaurora\\Ci4_logs\\": "src"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "composer dump-autoload",
+            "php spark migrate:latest -n all"
+        ]
+    }
+}
