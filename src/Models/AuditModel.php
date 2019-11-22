@@ -7,7 +7,7 @@ class AuditModel extends Model
 	protected $table      = 'audits';
 	protected $primaryKey = 'id';
 
-	protected $returnType = 'Tatter\Audits\Entities\Audit';
+	protected $returnType = 'object';
 	protected $useSoftDeletes = false;
 
 	protected $allowedFields = ['source', 'source_id', 'user_id', 'event', 'summary', 'created_at'];

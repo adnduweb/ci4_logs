@@ -28,66 +28,76 @@
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Config\Services;
 use Spreadaurora\Ci4_logs\Models\AuditModel;
+
 //use Spreadaurora\Ci4_logs\Exceptions\AuditsException;
 
 /*** CLASS ***/
 class Audits
 {
-	/**
-	 * Our configuration instance.
-	 *
-	 * @var \Spreadaurora\Ci4_logs\Config\Audits
-	 */
-	protected $config;
+    /**
+     * Our configuration instance.
+     *
+     * @var \Spreadaurora\Ci4_logs\Config\Audits
+     */
+    protected $config;
 
-	/**
-	 * The active user session.
-	 *
-	 * @var \CodeIgniter\Session\Session
-	 */
-	protected $session;
+    /**
+     * The active user session.
+     *
+     * @var \CodeIgniter\Session\Session
+     */
+    protected $session;
 
-	// array of audit rows waiting to add to the database
-	protected $queue = [ ];
+    // array of audit rows waiting to add to the database
+    protected $queue = [ ];
 
-	// initiate library, check for existing session
-	public function __construct(BaseConfig $config)
-	{
-		// save configuration
-		$this->config = $config;
+    // initiate library, check for existing session
+    public function __construct(BaseConfig $config)
+    {
+        // save configuration
+        $this->config = $config;
 
-		// initiate the Session library
-		$this->session = Services::session();
-	}
+        // initiate the Session library
+        $this->session = Services::session();
+    }
 
-	// checks for a logged in user based on config
-	// returns user ID, 0 for "not logged in", -1 for CLI
-	public function sessionUserId(): int
-	{
-		if (is_cli())
-			return -1;
-		return $this->session->get($this->config->sessionUserId) ?? 0;
-	}
+    // checks for a logged in user based on config
+    // returns user ID, 0 for "not logged in", -1 for CLI
+    public function sessionUserId(): int
+    {
+        if (is_cli()) {
+            return -1;
+        }
+        return $this->session->get($this->config->sessionUserId) ?? 0;
+    }
 
-	// add an audit row to the queue
-	public function add($audit)
-	{
-		if (empty($audit))
-			return false;
+    // add an audit row to the queue
+    public function add($audit)
+    {
+        if (empty($audit)) {
+            return false;
+        }
 
-		// add common data
-		$audit['user_id'] = $this->sessionUserId();
-		$audit['created_at'] = date('Y-m-d H:i:s');
-		$this->queue[] = $audit;
-	}
+        // add common data
+        $audit['user_id'] = $this->sessionUserId();
+        $audit['created_at'] = date('Y-m-d H:i:s');
+        // @TODO 2019-11-22 18:57:57
+        //print_r($audit);
+        $this->queue[] = $audit;
+        if ($audit['event'] == "delete") {
+            $audits = new AuditModel();
+            $audits->insertBatch($this->queue);
+        }
+    }
 
-	// batch insert all audits from the queue
-	public function save()
-	{
-		if (empty($this->queue))
-			return;
+    // batch insert all audits from the queue
+    public function save()
+    {
+        if (empty($this->queue)) {
+            return;
+        }
 
-		$audits = new AuditModel();
-		$audits->insertBatch($this->queue);
-	}
+        $audits = new AuditModel();
+        $audits->insertBatch($this->queue);
+    }
 }
