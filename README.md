@@ -1,43 +1,32 @@
-# Spreadaurora\Ci4_logs
+# ci4_logs
 Gestion de logs pour codeIgniter 4
 
 
-
-## Quick Start
-
-1. Install with Composer: `> composer require tatter/audits`
-2. Update the database: `> php spark migrate -all`
-3. Setup your models:
-```
+Quick Start
+Install with Composer: > composer require spreadaurora/ci4_logs
+Update the database: > php spark migrate -all
+Setup your models:
 class JobModel extends Model
 {
-  use \Spreadaurora\Ci4_logs\Traits\AuditsTrait;
+  use \Tatter\Audits\Traits\AuditsTrait;
   protected $afterInsert = ['auditInsert'];
   protected $afterUpdate = ['auditUpdate'];
   protected $afterDelete = ['auditDelete'];
-```
-4. All done!
-
-## Features
-
+All done!
+Features
 Provides ready-to-use object logging for CodeIgniter 4
 
-## Installation
+Installation
+Install easily via Composer to take advantage of CodeIgniter 4's autoloading capabilities and always be up-to-date:
 
-Install easily via Composer to take advantage of CodeIgniter 4's autoloading capabilities
-and always be up-to-date:
-* `> composer require tatter/audits`
+> composer require spreadaurora/ci4_logs
+Or, install manually by downloading the source files and adding the directory to app/Config/Autoload.php.
 
-Or, install manually by downloading the source files and adding the directory to
-`app/Config/Autoload.php`.
+Once the files are downloaded and included in the autoload, run any library migrations to ensure the database is setup correctly:
 
-Once the files are downloaded and included in the autoload, run any library migrations
-to ensure the database is setup correctly:
-* `> php spark migrate -all`
+> php spark migrate -all
+Pro Tip: You can add the spark command to your composer.json to ensure your database is always current with the latest release:
 
-**Pro Tip:** You can add the spark command to your composer.json to ensure your database is
-always current with the latest release:
-```
 {
   ...
     "scripts": {
@@ -47,36 +36,23 @@ always current with the latest release:
         ]
     },
   ...
-```
+Configuration (optional)
+The library's default behavior can be altered by extending its config file. Copy bin/Audits.php to app/Config/Audits.php and follow the instructions in the comments. If no config file is found in app/Config the library will use its own.
 
-## Configuration (optional)
+Usage
+Once the library is included all the resources are ready to go and you just need to specify which models and events to audit. Use AuditsTrait to add support to any models you would like tracked:
 
-The library's default behavior can be altered by extending its config file. Copy
-**bin/Audits.php** to **app/Config/Audits.php** and follow the instructions in the
-comments. If no config file is found in **app/Config** the library will use its own.
-
-## Usage
-
-Once the library is included all the resources are ready to go and you just need to
-specify which models and events to audit. Use AuditsTrait to add support to any models
-you would like tracked:
-```
 class JobModel extends Model
 {
-  use \Spreadaurora\Ci4_logs\Traits\AuditsTrait;
-```
-Then specify which events you want audited by assigning the corresponding audit methods
-for those events:
-```
+  use \spreadaurora\ci4_logs\Traits\AuditsTrait;
+Then specify which events you want audited by assigning the corresponding audit methods for those events:
+
   protected $afterInsert = ['auditInsert'];
   protected $afterUpdate = ['auditUpdate'];
   protected $afterDelete = ['auditDelete'];
-```
+The Audits library will create basic logs of each event in the audits table, for example:
 
-The Audits library will create basic logs of each event in the `audits` table, for example:
-```
 | id | source | source_id | user_id | event  | summary  |          created_at |
 +----+--------+-----------+---------+--------+----------+---------------------+
 | 10 | sites  |        27 |       9 | create | 2 rows   | 2019-04-05 15:58:40 |
 | 11 | jobs   |        10 |       9 | update | 5 rows   | 2019-04-05 16:01:35 |
-````

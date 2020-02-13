@@ -1,32 +1,8 @@
-<?php namespace Spreadaurora\Ci4_logs;
+<?php
 
-/***
-* Name: Audits
-* Author: Matthew Gatner
-* Contact: mgatner@tattersoftware.com
-* Created: 2019-04-05
-*
-* Description:  Lightweight object logging for CodeIgniter 4
-*
-* Requirements:
-* 	>= PHP 7.1
-* 	>= CodeIgniter 4.0
-*	Preconfigured, autoloaded Database
-*	`audits` table (run migrations)
-*
-* Configuration:
-* 	Use Config/Audits.php to override default behavior
-* 	Run migrations to update database tables:
-* 		> php spark migrate:latest -all
-*
-* @package CodeIgniter4-Audits
-* @author Matthew Gatner
-* @link https://github.com/tattersoftware/codeigniter4-audits
-*
-***/
+namespace Spreadaurora\Ci4_logs;
 
 use CodeIgniter\Config\BaseConfig;
-use CodeIgniter\Config\Services;
 use Spreadaurora\Ci4_logs\Models\AuditModel;
 
 //use Spreadaurora\Ci4_logs\Exceptions\AuditsException;
@@ -37,29 +13,27 @@ class Audits
     /**
      * Our configuration instance.
      *
-     * @var \Spreadaurora\Ci4_logs\Config\Audits
+     * @var \Tatter\Audits\Config\Audits
      */
     protected $config;
 
     /**
-     * The active user session.
+     * Audit rows waiting to add to the database.
      *
-     * @var \CodeIgniter\Session\Session
+     * @var array
      */
-    protected $session;
+    protected $queue = [];
 
-    // array of audit rows waiting to add to the database
-    protected $queue = [ ];
-
-    // initiate library, check for existing session
+    /**
+     * Store the configuration
+     *
+     * @param BaseConfig $config  The Audits configuration to use
+     */
     public function __construct(BaseConfig $config)
     {
-        // save configuration
         $this->config = $config;
-
-        // initiate the Session library
-        $this->session = Services::session();
     }
+
 
     // checks for a logged in user based on config
     // returns user ID, 0 for "not logged in", -1 for CLI
@@ -68,7 +42,7 @@ class Audits
         if (is_cli()) {
             return -1;
         }
-        return $this->session->get($this->config->sessionUserId) ?? 0;
+        return session($this->config->sessionUserId) ?? 0;
     }
 
     // add an audit row to the queue
@@ -91,13 +65,14 @@ class Audits
     }
 
     // batch insert all audits from the queue
-    public function save()
+    public function save(): self
     {
-        if (empty($this->queue)) {
-            return;
-        }
+        if (! empty($this->queue))
+		{
+			$audits = new AuditModel();
+			$audits->insertBatch($this->queue);
+		}
 
-        $audits = new AuditModel();
-        $audits->insertBatch($this->queue);
+		return $this;
     }
 }
