@@ -12,7 +12,7 @@
 
 use CodeIgniter\Config\BaseConfig;
 
-class Audits extends \Spreadaurora\Ci4_logs\Config\Audits
+class Audits extends \Adnduweb\Ci4_logs\Config\Audits
 {
 	// key in $_SESSION that contains the integer ID of a logged in user
 	public $sessionUserId = "logged_in";
