@@ -1,6 +1,6 @@
 <?php
 
-namespace Spreadaurora\Ci4_logs\Config;
+namespace Adnduweb\Ci4_logs\Config;
 
 use CodeIgniter\Config\BaseService;
 
@@ -17,6 +17,6 @@ class Services extends BaseService
 			$config = config('Audits');
 		}
 
-		return new \Spreadaurora\Ci4_logs\Audits($config);
+		return new \Adnduweb\Ci4_logs\Audits($config);
 	}
 }

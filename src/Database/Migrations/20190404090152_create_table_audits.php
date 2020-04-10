@@ -1,4 +1,4 @@
-<?php namespace Spreadaurora\Ci4_logs\Database\Migrations;
+<?php namespace Adnduweb\Ci4_logs\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 

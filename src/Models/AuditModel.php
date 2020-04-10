@@ -1,4 +1,4 @@
-<?php namespace Spreadaurora\Ci4_logs\Models;
+<?php namespace Adnduweb\Ci4_logs\Models;
 
 use CodeIgniter\Model;
 
@@ -48,7 +48,7 @@ class AuditModel extends Model
         $this->audits->select('id');
         if (isset($query['generalSearch']) && !empty($query['generalSearch'])) {
             $this->audits->where('(source LIKE "%' . $query['generalSearch'] . '%" OR event LIKE "%' . $query['generalSearch'] . '%")');
-		} 
+		}
 
         $this->audits->orderBy($sort['field'] . ' ' . $sort['sort']);
 

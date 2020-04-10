@@ -1,7 +1,7 @@
-<?php namespace Spreadaurora\Ci4_logs\Traits;
+<?php namespace Adnduweb\Ci4_logs\Traits;
 
 use CodeIgniter\Config\Services;
-use Spreadaurora\Ci4_logs\Models\AuditModel;
+use Adnduweb\Ci4_logs\Models\AuditModel;
 
 /*** CLASS ***/
 trait AuditsTrait

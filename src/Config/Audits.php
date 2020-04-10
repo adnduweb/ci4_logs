@@ -1,4 +1,4 @@
-<?php namespace Spreadaurora\Ci4_logs\Config;
+<?php namespace Adnduweb\Ci4_logs\Config;
 
 use CodeIgniter\Config\BaseConfig;
 

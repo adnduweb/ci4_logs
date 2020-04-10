@@ -1,5 +1,5 @@
 {
-    "name": "spreadaurora/ci4_logs",
+    "name": "adnduweb/ci4_logs",
     "description": "Lightweight logs management for CodeIgniter 4",
     "keywords": [
         "codeigniter",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Spreadaurora\\Ci4_logs\\": "src"
+            "Adnduweb\\Ci4_logs\\": "src"
         }
     },
     "scripts": {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Spreadaurora\Ci4_logs;
+namespace Adnduweb\Ci4_logs;
 
 use CodeIgniter\Config\BaseConfig;
-use Spreadaurora\Ci4_logs\Models\AuditModel;
+use Adnduweb\Ci4_logs\Models\AuditModel;
 
-//use Spreadaurora\Ci4_logs\Exceptions\AuditsException;
+//use Adnduweb\Ci4_logs\Exceptions\AuditsException;
 
 /*** CLASS ***/
 class Audits
