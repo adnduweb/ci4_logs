@@ -46,10 +46,11 @@ trait AuditsTrait
 			return false;
 
 		$audit = [
-			'source'    => $this->table,
-			'source_id' => $this->db->insertID(),
+			'source'    => $this->localizeFile,
+			'source_id' => $this->db->insertID() . '2',
 			'event'     => 'insert',
 			'summary'   => count($data['data']) . ' rows',
+			'data'      => json_encode($data['data']),
 		];
 		Services::audits()->add($audit);
 
@@ -60,10 +61,11 @@ trait AuditsTrait
 	protected function auditUpdate(array $data)
 	{
 		$audit = [
-			'source'    => $this->table,
-			'source_id' => $data['id'],
+			'source'    => $this->localizeFile,
+			'source_id' => is_array($data['id']) ? $data['id'][0] : $data['id'],
 			'event'     => 'update',
 			'summary'   => count($data['data']) . ' rows',
+			'data'      => json_encode($data['data']),
 		];
 		Services::audits()->add($audit);
 
@@ -79,7 +81,7 @@ trait AuditsTrait
 			return false;
 
 		$audit = [
-			'source'    => $this->table,
+			'source'    => $this->localizeFile,
 			'event'     => 'delete',
 			'summary'   => ($data['purge'])? 'purge' : 'soft',
 		];

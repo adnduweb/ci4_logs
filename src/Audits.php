@@ -69,7 +69,8 @@ class Audits
     {
         if (! empty($this->queue))
 		{
-			$audits = new AuditModel();
+            //print_r($this->queue); exit;
+            $audits = new AuditModel();
 			$audits->insertBatch($this->queue);
 		}
 

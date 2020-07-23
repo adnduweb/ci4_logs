@@ -9,7 +9,8 @@ class AuditModel extends Model
     protected $table      = 'audits';
     protected $primaryKey = 'id';
 
-    protected $returnType = 'object';
+    protected $returnType     = 'object';
+    protected $localizeFile   = 'Adnduweb\Ci4_logs\Models\AuditModel';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['source', 'source_id', 'user_id', 'event', 'summary', 'created_at'];
