@@ -1,11 +1,11 @@
 <?php
 
-namespace Adnduweb\Ci4_logs;
+namespace Adnduweb\Ci4Logs;
 
 use CodeIgniter\Config\BaseConfig;
-use Adnduweb\Ci4_logs\Models\AuditModel;
+use Adnduweb\Ci4Logs\Models\AuditModel;
 
-//use Adnduweb\Ci4_logs\Exceptions\AuditsException;
+//use Adnduweb\Ci4Logs\Exceptions\AuditsException;
 
 /*** CLASS ***/
 class Audits

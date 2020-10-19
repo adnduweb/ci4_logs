@@ -1,6 +1,6 @@
 <?php
 
-namespace Adnduweb\Ci4_logs\Models;
+namespace Adnduweb\Ci4Logs\Models;
 
 use CodeIgniter\Model;
 
@@ -10,7 +10,7 @@ class AuditModel extends Model
     protected $primaryKey = 'id';
 
     protected $returnType     = 'object';
-    protected $localizeFile   = 'Adnduweb\Ci4_logs\Models\AuditModel';
+    protected $localizeFile   = 'Adnduweb\Ci4Logs\Models\AuditModel';
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['source', 'source_id', 'user_id', 'event', 'summary', 'created_at'];

@@ -1,11 +1,6 @@
 {
     "name": "adnduweb/ci4_logs",
     "description": "Lightweight logs management for CodeIgniter 4",
-    "keywords": [
-        "codeigniter",
-        "codeigniter4",
-        "logs"
-    ],
     "homepage": "https://github.com/adnduweb/ci4_logs",
     "license": "MIT",
     "authors": [{
@@ -23,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Adnduweb\\Ci4_logs\\": "src"
+            "Adnduweb\\Ci4Logs\\": ""
         }
     },
     "scripts": {

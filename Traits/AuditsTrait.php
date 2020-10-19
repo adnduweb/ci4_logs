@@ -1,7 +1,7 @@
-<?php namespace Adnduweb\Ci4_logs\Traits;
+<?php namespace Adnduweb\Ci4Logs\Traits;
 
 use CodeIgniter\Config\Services;
-use Adnduweb\Ci4_logs\Models\AuditModel;
+use Adnduweb\Ci4Logs\Models\AuditModel;
 
 /*** CLASS ***/
 trait AuditsTrait
